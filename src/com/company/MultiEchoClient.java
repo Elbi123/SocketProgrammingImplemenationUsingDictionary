@@ -30,11 +30,14 @@ public class MultiEchoClient {
             Scanner userEntry = new Scanner(System.in);
             String message, received;
 
+            System.out.println("Enter:\n \t1- Create \n \t2- Edit");
+
             do {
                 System.out.println("Enter message ('QUIT') to exit");
                 message = userEntry.nextLine();
                 output.println(message);
                 received = input.nextLine();
+
                 System.out.println("\nSERVER >>> " + received);
             } while (!message.equalsIgnoreCase("QUIT"));
         } catch (IOException ex){

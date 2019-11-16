@@ -1,5 +1,8 @@
 package com.company;
 
+import org.json.simple.JSONObject;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.*;
@@ -48,7 +51,23 @@ class ClientHandler extends Thread {
         String received;
         do {
             received = input.nextLine();
-            output.println("ECHO: " + received);
+            if (received.equalsIgnoreCase("create")){
+                JSONObject object = new JSONObject();
+                object.put("word_4", "meaning_4");
+
+                try {
+                    PrintWriter pw = new PrintWriter("JSONExample.json");
+                    pw.write(object.toJSONString());
+                    pw.flush();
+                    pw.close();
+                } catch (FileNotFoundException ex){
+                    System.out.println(ex);
+                }
+
+            }
+            if (received.equalsIgnoreCase("edit")){
+                output.println("ECHO: " + received);
+            }
         } while(!received.equalsIgnoreCase("QUIT"));
         try {
             if (client != null){
